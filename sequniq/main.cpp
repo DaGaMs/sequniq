@@ -1,8 +1,13 @@
 #include <zlib.h>
 #include <stdio.h>
+#include <string>
+#include <iostream>
+#include <algorithm>
 #include <unordered_map>
+
 #include "kseq.h"
 #include "MurmurHash3.h"
+#include <tclap/CmdLine.h>
 
 #if __x86_64__
 /* 64-bit */
@@ -11,11 +16,6 @@
 #define murmur(k, l, s, o) MurmurHash3_x86_128(k, l, s, o)
 #endif
 
-typedef enum fastqScoreOffsets {
-    SANGEROFFSET        = 33,
-    SOLEXAOFFSET        = 59,
-    ILLUMINA13OFFSET    = 64
-} fastqScoreOffsets;
 //using namespace std;
 
 KSEQ_INIT(gzFile, gzread)
@@ -56,10 +56,10 @@ struct OffsetPair
     int qual;
 };
 
-int calculate_score (const char *scoreString, const int scoreOffset) {
+int calculate_score (const char *scoreString) {
     int result = 0;
     while (*scoreString){
-        result += *scoreString - scoreOffset;
+        result += *scoreString - 33;
         scoreString++;
     }
     return result;
@@ -67,22 +67,45 @@ int calculate_score (const char *scoreString, const int scoreOffset) {
 
 int main(int argc, char *argv[])
 {
+    std::string name;
+    bool gzip;
+
+    std::string input1file, input2file;
+    
+    try {
+        TCLAP::CmdLine cmd("sequniq removes identical reads from FastQ files, retaining only the highest score string.", ' ', "0.1");
+        TCLAP::ValueArg<std::string> nameArg("p","prefix","File name prefix for output",false,"","prefix");
+        cmd.add( nameArg );
+        
+        TCLAP::SwitchArg gzipSwitch("z","gzip","Compress output", false);
+        cmd.add( gzipSwitch );
+        
+        TCLAP::UnlabeledValueArg<std::string> input1arg("file1.fq[.gz]", "FastQ file (optionally gzip compressed) to be filtered", true, "", "file1.fq[.gz]", cmd);
+        TCLAP::UnlabeledValueArg<std::string> input2arg("file2.fq[.gz]", "FastQ file (optionally gzip compressed) with paired reads to file 1", false, "", "file2.fq[.gz]", cmd);
+
+        // Parse the argv array.
+        cmd.parse( argc, argv );
+        
+        // Get the value parsed by each arg.
+        name = nameArg.getValue();
+        gzip = gzipSwitch.getValue();
+        input1file = input1arg.getValue();
+        input2file = input2arg.getValue();
+    } catch (TCLAP::ArgException &e)  // catch any exceptions
+    { std::cerr << "ERROR: " << e.error() << " for arg " << e.argId() << std::endl; }
+
     uint32_t seed = rand(); // random hash seed
     
     gzFile fp1, fp2;
     kseq_t *seq1, *seq2;
-
-    int l1, l2;
-    if (argc == 1) {
-        fprintf(stderr, "Usage: %s <in.seq> [<in.seq2>]\n", argv[0]);
-        return 1;
-    }
     
-    fp1 = gzopen(argv[1], "r");
+    int l1, l2;
+
+    fp1 = gzopen(input1file.c_str(), "r");
     seq1 = kseq_init(fp1);
     
-    if (argc > 2) {
-        fp2 = gzopen(argv[2], "r");
+    if (input2file != "") {
+        fp2 = gzopen(input2file.c_str(), "r");
         seq2 = kseq_init(fp2);
     }
     else
@@ -133,7 +156,7 @@ int main(int argc, char *argv[])
             lastOffset1 = (gztell(fp1) - seq1->f->end) + seq1->f->begin;
             lastOffset2 = (gztell(fp2) - seq2->f->end) + seq2->f->begin;
             
-            op.qual = op.qual = calculate_score(seq1->qual.s, SANGEROFFSET) + calculate_score(seq2->qual.s, SANGEROFFSET);
+            op.qual = op.qual = calculate_score(seq1->qual.s) + calculate_score(seq2->qual.s);
         }
         else
         {
@@ -141,7 +164,7 @@ int main(int argc, char *argv[])
             op.offset1 = lastOffset1;
             lastOffset1 = (gztell(fp1) - seq1->f->end) + seq1->f->begin;
             
-            op.qual = calculate_score(seq1->qual.s, SANGEROFFSET);
+            op.qual = calculate_score(seq1->qual.s);
         }
         
         mh.p = hashKey;

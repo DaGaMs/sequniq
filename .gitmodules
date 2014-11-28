@@ -1,0 +1,3 @@
+[submodule "External/TCLAP"]
+	path = External/TCLAP
+	url = git://git.code.sf.net/p/tclap/code
