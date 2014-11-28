@@ -7,7 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
-		CA5F95C71A28B370001B125B /* main.cpp in Sources */ = {isa = PBXBuildFile; fileRef = CA5F95C61A28B370001B125B /* main.cpp */; };
+		CA5F95C71A28B370001B125B /* sequniq.cpp in Sources */ = {isa = PBXBuildFile; fileRef = CA5F95C61A28B370001B125B /* sequniq.cpp */; };
 		CA5F95CF1A28B78A001B125B /* MurmurHash3.cpp in Sources */ = {isa = PBXBuildFile; fileRef = CA5F95CE1A28B78A001B125B /* MurmurHash3.cpp */; };
 		CA5F95DE1A28C223001B125B /* libz.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = CA5F95DD1A28C223001B125B /* libz.dylib */; };
 /* End PBXBuildFile section */
@@ -26,7 +26,7 @@
 
 /* Begin PBXFileReference section */
 		CA5F95C31A28B370001B125B /* sequniq */ = {isa = PBXFileReference; explicitFileType = "compiled.mach-o.executable"; includeInIndex = 0; path = sequniq; sourceTree = BUILT_PRODUCTS_DIR; };
-		CA5F95C61A28B370001B125B /* main.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = main.cpp; sourceTree = "<group>"; };
+		CA5F95C61A28B370001B125B /* sequniq.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = sequniq.cpp; sourceTree = "<group>"; };
 		CA5F95CD1A28B78A001B125B /* MurmurHash3.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MurmurHash3.h; sourceTree = "<group>"; };
 		CA5F95CE1A28B78A001B125B /* MurmurHash3.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = MurmurHash3.cpp; sourceTree = "<group>"; };
 		CA5F95D21A28BA9E001B125B /* kseq.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = kseq.h; sourceTree = "<group>"; };
@@ -96,7 +96,7 @@
 				CA5F95FB1A28F534001B125B /* tclap */,
 				CA5F95D11A28BA9E001B125B /* kseq */,
 				CA5F95D01A28B791001B125B /* MurmurHash */,
-				CA5F95C61A28B370001B125B /* main.cpp */,
+				CA5F95C61A28B370001B125B /* sequniq.cpp */,
 				CA5F95D81A28BDBF001B125B /* Test */,
 			);
 			path = sequniq;
@@ -219,7 +219,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				CA5F95C71A28B370001B125B /* main.cpp in Sources */,
+				CA5F95C71A28B370001B125B /* sequniq.cpp in Sources */,
 				CA5F95CF1A28B78A001B125B /* MurmurHash3.cpp in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
