@@ -9,6 +9,7 @@
 /* Begin PBXBuildFile section */
 		CA5F95C71A28B370001B125B /* main.cpp in Sources */ = {isa = PBXBuildFile; fileRef = CA5F95C61A28B370001B125B /* main.cpp */; };
 		CA5F95CF1A28B78A001B125B /* MurmurHash3.cpp in Sources */ = {isa = PBXBuildFile; fileRef = CA5F95CE1A28B78A001B125B /* MurmurHash3.cpp */; };
+		CA5F95DE1A28C223001B125B /* libz.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = CA5F95DD1A28C223001B125B /* libz.dylib */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXCopyFilesBuildPhase section */
@@ -28,6 +29,12 @@
 		CA5F95C61A28B370001B125B /* main.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = main.cpp; sourceTree = "<group>"; };
 		CA5F95CD1A28B78A001B125B /* MurmurHash3.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MurmurHash3.h; sourceTree = "<group>"; };
 		CA5F95CE1A28B78A001B125B /* MurmurHash3.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = MurmurHash3.cpp; sourceTree = "<group>"; };
+		CA5F95D21A28BA9E001B125B /* kseq.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = kseq.h; sourceTree = "<group>"; };
+		CA5F95D91A28BDBF001B125B /* IL_test_1.fq */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = IL_test_1.fq; sourceTree = "<group>"; };
+		CA5F95DA1A28BDBF001B125B /* IL_test_2.fq */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = IL_test_2.fq; sourceTree = "<group>"; };
+		CA5F95DB1A28BDBF001B125B /* SOL_varlen_1.fq */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = SOL_varlen_1.fq; sourceTree = "<group>"; };
+		CA5F95DC1A28BDBF001B125B /* SOL_varlen_2.fq */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = SOL_varlen_2.fq; sourceTree = "<group>"; };
+		CA5F95DD1A28C223001B125B /* libz.dylib */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; name = libz.dylib; path = usr/lib/libz.dylib; sourceTree = SDKROOT; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -35,6 +42,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				CA5F95DE1A28C223001B125B /* libz.dylib in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -44,6 +52,7 @@
 		CA5F95BA1A28B370001B125B = {
 			isa = PBXGroup;
 			children = (
+				CA5F95DD1A28C223001B125B /* libz.dylib */,
 				CA5F95C51A28B370001B125B /* sequniq */,
 				CA5F95C41A28B370001B125B /* Products */,
 			);
@@ -60,8 +69,10 @@
 		CA5F95C51A28B370001B125B /* sequniq */ = {
 			isa = PBXGroup;
 			children = (
+				CA5F95D11A28BA9E001B125B /* kseq */,
 				CA5F95D01A28B791001B125B /* MurmurHash */,
 				CA5F95C61A28B370001B125B /* main.cpp */,
+				CA5F95D81A28BDBF001B125B /* Test */,
 			);
 			path = sequniq;
 			sourceTree = "<group>";
@@ -74,6 +85,26 @@
 			);
 			name = MurmurHash;
 			sourceTree = "<group>";
+		};
+		CA5F95D11A28BA9E001B125B /* kseq */ = {
+			isa = PBXGroup;
+			children = (
+				CA5F95D21A28BA9E001B125B /* kseq.h */,
+			);
+			name = kseq;
+			path = External/kseq;
+			sourceTree = SOURCE_ROOT;
+		};
+		CA5F95D81A28BDBF001B125B /* Test */ = {
+			isa = PBXGroup;
+			children = (
+				CA5F95D91A28BDBF001B125B /* IL_test_1.fq */,
+				CA5F95DA1A28BDBF001B125B /* IL_test_2.fq */,
+				CA5F95DB1A28BDBF001B125B /* SOL_varlen_1.fq */,
+				CA5F95DC1A28BDBF001B125B /* SOL_varlen_2.fq */,
+			);
+			path = Test;
+			sourceTree = SOURCE_ROOT;
 		};
 /* End PBXGroup section */
 
