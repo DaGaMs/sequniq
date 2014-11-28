@@ -177,7 +177,7 @@ int main(int argc, char *argv[])
     char *newChar = NULL;
     while ((l1 = kseq_read(seq1)) >= 0) {
         //calculate the hash function and print
-        uint64_t *hashKey = new uint64_t[2];
+        uint64_t *hashKey = new uint64_t[sizeof(uint64_t)*2];
         MurmurHash128 mh;
         OffsetPair op;
         
@@ -223,7 +223,7 @@ int main(int argc, char *argv[])
         }
         
         mh.p = hashKey;
-        mh.size = 128;
+        mh.size = 2;
         
         if (hashtable.count(mh)) {
             OffsetPair oldOP = hashtable.at(mh);
