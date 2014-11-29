@@ -1,6 +1,8 @@
-CPP = clang++
-CFLAGS = -arch x86_64 -std=gnu++11 -stdlib=libc++ -Os -fasm-blocks -fstrict-aliasing -fvisibility=hidden -fvisibility-inlines-hidden
+CPP = c++
+CFLAGS = -std=gnu++11 -Ofast
 INCLUDE = -IExternal/TCLAP/include -IExternal/kseq
+
+prefix=/usr/local
 
 all: sequniq
 
@@ -18,3 +20,8 @@ sequniq: MurmurHash3.o sequniq.o
 
 clean:
 	$(RM) -rf build bin/*
+	
+install: sequniq
+	install -m 0755 sequniq $(prefix)/bin
+
+.PHONY: install
